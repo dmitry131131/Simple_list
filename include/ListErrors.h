@@ -6,7 +6,12 @@
 #define LIST_ERRORS_H
 
 enum listErrorCode {
-    NO_LIST_ERRORS
+    NO_LIST_ERRORS,
+    NULL_PTR_IN_LIST,
+    LIST_LINK_ERROR,
+    FREE_PTR_ERROR,
+    WRONG_LEN,
+    CALLOC_ERROR
 
 };
 

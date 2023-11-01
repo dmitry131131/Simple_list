@@ -11,13 +11,16 @@ typedef int elem_t;
 
 struct ListData {
     elem_t* data;
-    long long int* next;
-    long long int* prev;
+    ssize_t* next;
+    ssize_t* prev;
 
-    long long int head;
-    long long int tail;
+    ssize_t head;
+    ssize_t tail;
 
-    long long int free; 
+    ssize_t free; 
+
+    size_t capacity;
+    size_t len;
 };
 
 #endif
