@@ -7,8 +7,6 @@
 
 typedef int elem_t;
 
-#include "ListErrors.h"
-
 struct ListData {
     elem_t* data;
     ssize_t* next;
@@ -22,5 +20,9 @@ struct ListData {
     size_t capacity;
     size_t len;
 };
+
+#include "ListErrors.h"
+#include "ListUtils.h"
+#include "ListMethods.h"
 
 #endif

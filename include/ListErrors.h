@@ -11,7 +11,8 @@ enum listErrorCode {
     LIST_LINK_ERROR,
     FREE_PTR_ERROR,
     WRONG_LEN,
-    CALLOC_ERROR
+    CALLOC_ERROR,
+    BAD_INDEX
 
 };
 
