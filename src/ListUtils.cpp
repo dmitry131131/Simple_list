@@ -8,6 +8,7 @@
 
 #include "List.h"
 
+// TODO Make every element verify
 listErrorCode list_verify(ListData* list)
 {
     assert(list);

@@ -8,8 +8,8 @@ int main()
         print_list_error(stderr, code);         \
         list_dtor(&list);                       \
         return code;                            \
-    }while(0) 
-          
+    }while(0)
+
     ListData list = {};
     listErrorCode err = NO_LIST_ERRORS;
 

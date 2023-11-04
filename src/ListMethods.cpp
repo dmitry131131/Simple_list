@@ -7,7 +7,6 @@
 
 #include "List.h"
 
-
 listErrorCode list_insert_in_tail(ListData* list, elem_t element, ssize_t* index)
 {
     assert(list);
@@ -108,3 +107,5 @@ listErrorCode list_remove_by_index(ListData* list, ssize_t index)
 
     return error;
 }
+
+// TODO make remove element function
