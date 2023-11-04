@@ -20,7 +20,7 @@ Include = -Iinclude -IColor_console_output/include
 Sources = ListUtils.cpp ListErrors.cpp ListMethods.cpp ListLog.cpp
 Main = main.cpp
 
-LibObjects = Color_console_output/build/Color_output.o
+Libs = -LColor_console_output/build/Color_output -LData_buffer/build/DataBuffer
 
 Source = $(addprefix $(SourcePrefix), $(Sources))
 MainObject = $(patsubst %.cpp, $(BuildPrefix)%.o, $(Main))
@@ -33,19 +33,21 @@ all : prepare folder $(TARGET)
 
 prepare: 
 	cd Color_console_output && make
+	cd Data_buffer && make
 
 $(BuildPrefix)%.o : $(SourcePrefix)%.cpp
 	@echo [CXX] -c $< -o $@
 	@$(CXX) $(CXXFLAGS) $(Include) -c $< -o $@
 
-$(TARGET) : $(LibObjects) $(objects) $(MainObject)
+$(TARGET) : $(objects) $(MainObject)
 	@echo [CC] $^ -o $@
-	@$(CXX) $(CXXFLAGS) $(Include) $(Libs) $^ -o $@
+	@$(CXX) $(CXXFLAGS) $(Libs) $(Include) $^ -o $@
 
 clean :
+	cd Color_console_output && make clean
+	cd Data_buffer && make clean
 	rm $(BuildFolder)/*.o
 	rm $(TARGET)
-	cd Color_console_output && make clean
 
 folder :
 	mkdir -p $(BuildFolder)
