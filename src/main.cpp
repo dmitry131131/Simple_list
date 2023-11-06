@@ -48,6 +48,8 @@ int main()
         RETURN(err);
     }
 
+    list_dump(&list);
+
     RETURN(NO_LIST_ERRORS);
     #undef RETURN
 }

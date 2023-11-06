@@ -7,6 +7,8 @@
 #include <assert.h>
 
 #include "List.h"
+#include "DataBuffer.h"
+#include "ListLog.h"
 
 // TODO Make every element verify
 listErrorCode list_verify(ListData* list)
@@ -71,10 +73,11 @@ listErrorCode list_ctor(ListData* list, size_t capacity)
     list->next[0] = 1;
     list->prev[0] = 0;
 
-    for (size_t i = 1; i < capacity; i++)
+    for (size_t i = 1; i < capacity - 1; i++)
     {
         list->next[i] = (ssize_t) i + 1;
     }
+    list->next[capacity - 1] = 0;
 
     for (size_t i = 1; i < capacity; i++)
     {
@@ -111,9 +114,33 @@ listErrorCode list_dump(ListData* list)
 {
     assert(list);
 
-    printf("Free: %ld\n", list->free);
-    printf("Head: %ld\n", list->head);
-    printf("Tail: %ld\n", list->tail);
+    outputBuffer buffer = {};
+
+    buffer_ctor(&buffer, list->capacity * 1000);
+
+    FILE* file = NULL;
+    if (create_output_file(&file, "list_test.dot", TEXT))
+    {
+        printf("Create error!\n");
+    }
+
+    if (write_dot_header(&buffer))
+    {
+        printf("header error!\n");
+    }
+
+    if (write_dot_body(&buffer, list))
+    {
+        printf("body error!\n");
+    }
+
+    write_dot_footer(&buffer, list);
+
+    printf("%lu\n", buffer.bufferPointer);
+
+    write_buffer_to_file(file, &buffer);
+
+    buffer_dtor(&buffer);
 
     return NO_LIST_ERRORS;
 }
