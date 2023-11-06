@@ -15,7 +15,7 @@ TARGET = list
 SourcePrefix = src/
 BuildPrefix = build/
 BuildFolder = build
-Include = -Iinclude -IColor_console_output/include
+Include = -Iinclude -IColor_console_output/include -IData_buffer/include
 
 Sources = ListUtils.cpp ListErrors.cpp ListMethods.cpp ListLog.cpp
 Main = main.cpp
