@@ -10,7 +10,6 @@
 #include "DataBuffer.h"
 #include "ListLog.h"
 
-// TODO Make every element verify
 listErrorCode list_verify(ListData* list)
 {
     assert(list);
@@ -25,16 +24,23 @@ listErrorCode list_verify(ListData* list)
     for (size_t _ = 0; _ < list->len - 1; _++)
     {
         adress = list->next[adress];
-        //printf("%ld\n", adress);
     }
     for (size_t _ = 0; _ < list->len - 1; _++)
     {
         adress = list->prev[adress];
-       // printf("%ld\n", adress);
     }
     if (key != list->data[adress])
     {
         return LIST_LINK_ERROR;
+    }
+
+    adress = list->head;
+    for (size_t _ = 1; _ < list->len; _++)
+    {
+        if (list->prev[list->next[adress]] != adress)
+        {
+            return LIST_LINK_ERROR;
+        }
     }
 
     adress = list->free;

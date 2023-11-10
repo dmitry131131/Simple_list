@@ -21,6 +21,23 @@ struct ListData {
     size_t len;
 };
 
+struct ListSegment {
+    elem_t data;
+    ssize_t* next;
+    ssize_t* prev;
+};
+
+struct SegmentedListData {
+    ListSegment* list;
+
+    ListSegment* head;
+    ListSegment* tail;
+    ListSegment* free;
+
+    size_t capacity;
+    size_t len;
+};
+
 #include "ListErrors.h"
 #include "ListUtils.h"
 #include "ListMethods.h"

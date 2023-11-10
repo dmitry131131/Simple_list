@@ -22,6 +22,7 @@ int main()
 
     if ((err = list_insert_in_tail(&list, 15, &in)))
     {
+        list_dump(&list);
         RETURN(err);
     }
 
@@ -38,17 +39,17 @@ int main()
         RETURN(err);
     }
 
-    if ((err = list_remove_by_index(&list, 3)))
-    {
-        RETURN(err);
-    }
-
     if ((err = list_insert_in_tail(&list, 11)))
     {
         RETURN(err);
     }
 
     if ((err = list_insert_in_tail(&list, 1)))
+    {
+        RETURN(err);
+    }
+
+    if ((err = list_remove_by_index(&list, 3)))
     {
         RETURN(err);
     }
