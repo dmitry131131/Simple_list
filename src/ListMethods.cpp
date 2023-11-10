@@ -33,6 +33,8 @@ listErrorCode list_insert_in_tail(ListData* list, elem_t element, ssize_t* index
     list->tail = tempIndex;
     list->len++;
 
+    list->prev[list->head] = list->tail;
+
     if (index) *index = tempIndex;
 
     return error;
@@ -73,6 +75,8 @@ listErrorCode list_insert_by_index(ListData* list, elem_t element, ssize_t index
     list->free = newFree;
     list->len++;
 
+    list->prev[list->head] = list->tail;
+
     return error;
 }
 
@@ -95,6 +99,11 @@ listErrorCode list_remove_by_index(ListData* list, ssize_t index)
     ssize_t tempNext = list->next[index];
     ssize_t tempPrev = list->prev[index];
 
+    if (list->next[index] == 0)
+    {
+        list->tail = list->prev[index];
+    }
+
     list->data[index] = __INT_MAX__;
     list->prev[index] = -1;
     list->next[index] = tempFree;
@@ -107,5 +116,3 @@ listErrorCode list_remove_by_index(ListData* list, ssize_t index)
 
     return error;
 }
-
-// TODO make remove element function

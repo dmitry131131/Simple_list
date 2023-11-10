@@ -29,6 +29,14 @@ listErrorCode write_dot_body(outputBuffer* buffer, ListData* list)
     assert(buffer);
     assert(list);
 
+    /*
+    for (size_t i = 0; i < list->capacity - 1; i++)
+    {
+        print_to_buffer(buffer, "%lu -> ", i);
+    }
+    print_to_buffer(buffer, "%lu [weight = 10000, color = \"#FFEFD5\"];\n\n", list->capacity - 1);
+    */
+
     for (size_t i = 0; i < list->capacity; i++)
     {
         print_to_buffer(buffer, "%lu [shape = Mrecord, style = filled, fillcolor = \"#FFF5EE\", color = \"#800000\", label = "
@@ -37,30 +45,25 @@ listErrorCode write_dot_body(outputBuffer* buffer, ListData* list)
     }
 
     print_to_buffer(buffer, "\n");
-    for (size_t i = 0; i < list->capacity - 1; i++)
-    {
-        print_to_buffer(buffer, "%lu -> ", i);
-    }
-    print_to_buffer(buffer, "%lu [weight = 10000, color = \"#FFEFD5\"];\n\n", list->capacity - 1);
 
     ssize_t adress = 0;
     for (size_t i = 0; i < list->len; i++)
     {
-        print_to_buffer(buffer, "%ld -> %ld [color = \"#0000ff\"]\n", adress, list->next[adress]);
+        print_to_buffer(buffer, "%ld -> %ld [weight = 1, color = \"#0000ff\"];\n", adress, list->next[adress]);
         adress = list->next[adress];
     }
 
     adress = list->tail;
     for (size_t i = 0; i < list->len; i++)
     {
-        print_to_buffer(buffer, "%ld -> %ld [color = \"#00ff00\"]\n", adress, list->prev[adress]);
+        print_to_buffer(buffer, "%ld -> %ld [weight = 1, color = \"#00ff00\"];\n", adress, list->prev[adress]);
         adress = list->prev[adress];
     }
 
     adress = list->free;
     for (size_t i = 0; i < (list->capacity - list->len); i++)
     {
-        print_to_buffer(buffer, "%ld -> %ld [color = \"#00ff00\"]\n", adress, list->next[adress]);
+        print_to_buffer(buffer, "%ld -> %ld [weight = 1,color = \"#0000ff\"];\n", adress, list->next[adress]);
         adress = list->next[adress];
     }
 

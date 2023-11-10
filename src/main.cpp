@@ -30,20 +30,25 @@ int main()
         RETURN(err);
     }
 
-    if ((err = list_insert_by_index(&list, 128, 1, &in)))
-    {
-        RETURN(err);
-    }
-
-    if ((err = list_insert_by_index(&list, 228, 1, &in)))
-    {
-        RETURN(err);
-    }
-
     printf("index: %ld\n", in);
     printf("data: %d\n",  list.data[in]);
 
     if ((err = list_insert_in_tail(&list, 10)))
+    {
+        RETURN(err);
+    }
+
+    if ((err = list_remove_by_index(&list, 3)))
+    {
+        RETURN(err);
+    }
+
+    if ((err = list_insert_in_tail(&list, 11)))
+    {
+        RETURN(err);
+    }
+
+    if ((err = list_insert_in_tail(&list, 1)))
     {
         RETURN(err);
     }
